@@ -1,0 +1,13 @@
+{
+ "shop" : "shop2", 
+ "area" : "ena02", 
+ "menu" : [{ "name" : "drink 1",
+             "price" : 10,
+             "description" : "drink desc 1" },
+          { "name" : "drink 2",
+             "price" : 20,
+             "description" : "drink desc 2" },
+          { "name" : "drink 3",
+             "price" : 13,
+             "description" : "drink desc 3" }]
+}

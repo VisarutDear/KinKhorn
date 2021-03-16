@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  api-service:
+    container_name: api-service
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: always
+    volumes: 
+      - ./backend:/app
+    ports:
+      - "9000:3000"
+    links:
+      - mongodb
+    networks:
+      - backend
+
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    restart: unless-stopped
+    volumes:
+      - ./backend/data:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - backend
+    
+  redis:
+    image: "redis:alpine" 
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+
+networks:
+  backend:
