@@ -25,7 +25,7 @@ router.post('/frontstore/:id', (req, res, next) => {
     shop.save()
         .then(createdShop => {
             res.status(201).json({
-            postId: createdShop._id,
+            shopId: createdShop._id,
             message: 'shop added sucessfully!'
             })
         });
