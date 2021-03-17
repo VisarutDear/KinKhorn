@@ -1,0 +1,4 @@
+COMMAND:
+
+clear redis cache
+docker exec -it <container-name> redis-cli FLUSHALL

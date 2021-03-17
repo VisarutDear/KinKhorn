@@ -1,7 +1,8 @@
-const app = require("./app");
+const app_api = require("./app");
 const http = require("http");
 const debug = require("@xmpp/debug");
 
+const app = app_api.app;
 const PORT = "3000";
 
 const normalizePort = val => {

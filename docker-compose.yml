@@ -11,6 +11,9 @@ services:
       - ./backend:/app
     ports:
       - "9000:3000"
+    depends_on:
+      - mongodb
+      - redis
     links:
       - mongodb
     networks:
@@ -28,13 +31,19 @@ services:
       - backend
     
   redis:
-    image: "redis:alpine" 
     container_name: redis
-    restart: unless-stopped
+    image: redis:alpine
+    volumes:
+      - ./backend/redis.conf:/usr/local/etc/redis/redis.conf
+    networks:
+      - backend 
+    # environment:
+    #   - REDIS_PORT_6379_TCP_ADDR:"backend:6379"  
     ports:
       - "6379:6379"
-    networks:
-      - backend
 
 networks:
   backend:
+
+volumes:
+  redis-data:
