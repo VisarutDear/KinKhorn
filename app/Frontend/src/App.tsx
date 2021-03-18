@@ -35,7 +35,7 @@ function App() {
   return (
     <div className='App'>
       <Switch>
-      <BasicLayout>
+      {/* <BasicLayout> */}
         <Route exact path='/' component={HomePage}/>
         <Route path='/auth/google'/>
         <Route path='/signout' component={SignOutPage}/>
@@ -45,7 +45,7 @@ function App() {
           //   ? <Redirect from="/signin" to="/" />
           //   : <Route path='/signin' component={SignInPage} />
         }
-      </BasicLayout>
+      {/* </BasicLayout> */}
       </Switch>
     </div>
   );
