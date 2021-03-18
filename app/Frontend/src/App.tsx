@@ -8,7 +8,8 @@ import SignOutPage from './Pages/SignOutPage';
 import { UserContext } from './Context/UserContext';
 import axios from 'axios';
 import BasicLayout from './Layouts/BasicLayout';
-import { FaBeer } from 'react-icons/fa';
+import CafeteriaA from './Pages/CafeteriaAPage';
+
 
 const PrivateRoute = (props: RouteProps) => {
   const userContext = useContext(UserContext);
@@ -41,6 +42,7 @@ function App() {
         <Route path='/auth/google'/>
         <Route path='/signout' component={SignOutPage}/>
         <Route path='/signin' component={SignInPage} />
+        <Route path='/cafeteriaA' component={CafeteriaA}/>
         {
           // (userContext.isSignedIn)
           //   ? <Redirect from="/signin" to="/" />

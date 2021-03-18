@@ -40,7 +40,7 @@ interface Menu {
 }
 
 
-function Home() {
+function CafeteriaA() {
     const [homePageInfo,setHomePageInfo] = useState([]);
     const [isCanteenOpen,setIsCanteenOpen] = useState(false);
     const userContext = useContext(UserContext);
@@ -87,7 +87,7 @@ function Home() {
             <Row>
                 <Col>
                     <h1>
-                        Kin Khorn HomePage
+                    Cafeteria A
                     </h1>
                 </Col>
             </Row>
@@ -120,4 +120,4 @@ function Home() {
 
 }
 
-export default Home;
+export default CafeteriaA;
