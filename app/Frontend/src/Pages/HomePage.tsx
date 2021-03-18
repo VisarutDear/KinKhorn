@@ -7,6 +7,7 @@ import User from '../Types/User.d';
 import { UserContext } from '../Context/UserContext';
 import { BsFillCaretDownFill } from "react-icons/bs";
 import { Container, Row, Col } from 'react-grid-system';
+import { Button, Card, ListGroup } from 'react-bootstrap';
 
 const CanteenStyled = styled.div`
     cursor : pointer;
@@ -19,6 +20,14 @@ const Droplist = styled.div`
   margin-bottom : 0px;
   text-overflow: clip;
   white-space: nowrap;
+`;
+const StyledButton = styled(Button)`
+  color: palevioletred;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid palevioletred;
+  border-radius: 3px;
 `;
 
 interface ShopInfo {
@@ -78,7 +87,7 @@ function Home() {
                     </h1>
                 </Col>
             </Row>
-            <Row>
+            <Card>
                 <Col>
                     <div>
                         {userContext.user.name}
@@ -88,8 +97,8 @@ function Home() {
                         {homePageInfo}
                     </p> */}
                 </Col>
-            </Row>
-            <CanteenStyled onClick = {toggleCanteenDropdown}>Canteen <BsFillCaretDownFill/> </CanteenStyled>
+            </Card>
+            <CanteenStyled onClick = {toggleCanteenDropdown}><Button>Canteen <BsFillCaretDownFill/></Button>  </CanteenStyled>
             {isCanteenOpen && (
                 <Droplist>
                     <a href = '/cafeteriaA'>Cafeteria A</a>
