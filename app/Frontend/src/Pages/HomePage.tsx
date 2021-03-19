@@ -27,6 +27,11 @@ const ShopStyled = styled(Row)`
     justify-content : space-between !important;
 `;
 
+const EachMenu = styled.div`
+    display : flex;
+    flex-flow : column;
+`;
+
 interface ShopInfo {
     id : string;
     menu : any;
@@ -65,13 +70,11 @@ function Home() {
     const ShopData = (
         <div>
             {homePageInfo.map((data : ShopInfo,i) => (
-                <ShopStyled>
+                <div>
                     {data.shop} {data.menu.map((ele : Menu) => (
-                    <div>
-                    {ele.name} </div>))}
-                    {data.menu.map((ele : Menu) => (
-                    <div> price : {ele.price}</div>))}
-                </ShopStyled>
+                    <EachMenu>
+                    {ele.name} price : {ele.price}</EachMenu>))}
+                </div>
             )
             )}
         </div>
@@ -79,10 +82,10 @@ function Home() {
 
     return (
         <>
-    <Form inline>
+    {/* <Form inline>
       <FormControl type="text" placeholder="Search" className="mr-sm-2" />
       <Button variant="outline-success">Search</Button>
-    </Form>
+    </Form> */}
         <Container>
             <Row>
                 <Col>

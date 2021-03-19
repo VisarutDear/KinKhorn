@@ -27,6 +27,11 @@ const ShopStyled = styled(Row)`
     justify-content : space-between !important;
 `;
 
+const EachMenu = styled.div`
+    display : flex;
+    flex-flow : column;
+`;
+
 interface ShopInfo {
     id : string;
     menu : any;
@@ -65,13 +70,11 @@ function CafeteriaA() {
     const ShopData = (
         <div>
             {homePageInfo.map((data : ShopInfo,i) => (
-                <ShopStyled>
+                <div>
                     {data.shop} {data.menu.map((ele : Menu) => (
-                    <div>
-                    {ele.name} </div>))}
-                    {data.menu.map((ele : Menu) => (
-                    <div> price : {ele.price}</div>))}
-                </ShopStyled>
+                    <EachMenu>
+                    {ele.name} price : {ele.price}</EachMenu>))}
+                </div>
             )
             )}
         </div>

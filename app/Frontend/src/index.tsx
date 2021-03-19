@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import {AppRoot} from './Layouts/Globalstyle';
 import UserProvider from './Context/UserContext';
+import './asstes/scss/mdb-free.scss';
 ReactDOM.render(
   <UserProvider>
     <React.StrictMode>

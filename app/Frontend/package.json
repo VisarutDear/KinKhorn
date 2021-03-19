@@ -15,6 +15,8 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "http-proxy-middleware": "^1.0.6",
+    "mdbreact": "^5.0.1",
+    "node-sass": "^5.0.0",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",
     "react-dom": "^17.0.1",
