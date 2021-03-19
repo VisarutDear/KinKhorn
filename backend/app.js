@@ -6,7 +6,7 @@ const { promisify } = require("util");
 const app = express();
 
 // mongodb
-mongoose.connect('mongodb://mongodb:27017/kinkhorn', 
+mongoose.connect('mongodb://kinkhorn:TcdVQ7XhxnS3Mp32uGSU@mongodb:27017/kinkhorn', 
                 { useNewUrlParser: true, useUnifiedTopology: true });
 
 // redis

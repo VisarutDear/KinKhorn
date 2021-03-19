@@ -1,8 +1,8 @@
 version: "3"
 
 services:
-  api-service:
-    container_name: api-service
+  api:
+    container_name: api
     build: 
       context: ./backend
       dockerfile: Dockerfile
@@ -16,6 +16,7 @@ services:
       - redis
     links:
       - mongodb
+      - redis
     networks:
       - backend
 
@@ -27,6 +28,7 @@ services:
       - ./backend/data:/data/db
     ports:
       - "27017:27017"
+    command: [--auth]
     networks:
       - backend
     
@@ -37,6 +39,7 @@ services:
       - ./backend/redis.conf:/usr/local/etc/redis/redis.conf
     networks:
       - backend 
+    #command: redis-server --requirepass "QCY68NMK7KGNabfPg72P"
     # environment:
     #   - REDIS_PORT_6379_TCP_ADDR:"backend:6379"  
     ports:

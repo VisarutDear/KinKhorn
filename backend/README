@@ -2,3 +2,7 @@ COMMAND:
 
 clear redis cache
 docker exec -it <container-name> redis-cli FLUSHALL
+
+access database (two accesses: root, kinkhorndb)
+mongo -u <user> -p <password> --authenticationDatabase <database_name>
+
