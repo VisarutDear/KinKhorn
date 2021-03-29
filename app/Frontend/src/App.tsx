@@ -11,6 +11,7 @@ import BasicLayout from './Layouts/BasicLayout';
 import MyActivitiesPage from './Pages/MyActivitiesPage';
 import PaymentPage from './Pages/PaymentPage';
 import AccountPage from './Pages/AccountPage';
+import StorePage from './Pages/StorePage';
 
 const PrivateRoute = (props: RouteProps) => {
   const userContext = useContext(UserContext);
@@ -48,6 +49,7 @@ function App() {
         <Route path='/signout' component={SignOutPage}/>
         <Route path='/oauth/google'/>
         <Route path='/oauth/logout'/>
+        <Route path='/store/storepage' component={StorePage}/>
         {
           (userContext.isSignedIn)
             ? <Redirect from='/signin' to='/' />
