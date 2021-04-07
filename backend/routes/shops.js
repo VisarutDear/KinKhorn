@@ -31,13 +31,14 @@ router.get('/customer', async (req, res, next) => {
         source: "redis",
         data: JSON.parse(getTitleDataFromCache)
         });
-
+        next();
     } catch (e) {
         console.error("unable to get list of shops", e);
         res.status(400).json({
         success: false,
         message: e
-    });
+        });
+        next(e);
     }
 })
 
@@ -72,18 +73,18 @@ router.post('/frontstore', async (req, res, next) => {
 });
 
 // update frontstore
-router.put("/frontstore/:shopId", async (req, res, next) => {
+router.put("/frontstore", async (req, res, next) => {
 
     try {
         const shop = new Shop({
-            _id: req.params.shopId,
+            _id: req.body.shopId,
             shop: req.body.shop,
             owner: req.body.owner,
             area: req.body.area,
             menu: req.body.menu
         });
 
-        Shop.updateOne({ _id: req.params.shopId }, shop)
+        Shop.updateOne({ _id: req.body.shopId }, shop)
             .then(result => {
                     res.status(200).json({ message: "shop updated sucessfully!",
                                         result: result }); 

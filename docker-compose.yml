@@ -39,7 +39,7 @@ services:
       - ./backend/redis.conf:/usr/local/etc/redis/redis.conf
     networks:
       - backend 
-    #command: redis-server --requirepass "QCY68NMK7KGNabfPg72P"
+    command: redis-server --requirepass "QCY68NMK7KGNabfPg72P"
     # environment:
     #   - REDIS_PORT_6379_TCP_ADDR:"backend:6379"  
     ports:

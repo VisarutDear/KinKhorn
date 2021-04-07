@@ -12,14 +12,23 @@ mongoose.connect('mongodb://kinkhorn:TcdVQ7XhxnS3Mp32uGSU@mongodb:27017/kinkhorn
 // redis
 const redisClient = require("redis").createClient;
 const redis = redisClient({
-  host: 'redis'
+  host: 'redis',
+  port: 6379,
+  password: 'QCY68NMK7KGNabfPg72P'
 });
+
+// check redis connection error
+redis.on('error', err => {
+  console.log('Error ' + err);
+});
+
 const getAsync = promisify(redis.get).bind(redis);
 
 // routes
 const shopsRoutes = require('./routes/shops');
-//const ordersRoutes = require('./routes/orders');
+const ordersRoutes = require('./routes/orders');
 
+// connect to mongodb
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'CONNECTION ERROR'));
 db.once('open', function () { 
@@ -47,7 +56,7 @@ app.get('/', (req, res) => {
 });
 
 app.use("/api/shops", shopsRoutes);
-//app.use("/api/orders", ordersRoutes);
+app.use("/api/orders", ordersRoutes);
 
 module.exports.app = app;
 module.exports.redis = redis;
