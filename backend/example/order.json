@@ -1,0 +1,16 @@
+{   
+    "shopId" : "---shopId---",
+    "userId" : "---userId---", 
+    "recieveTime" : null,
+    "orderList" : [{ 
+                        "foodId" : "60542c7982f39c0029d647da",
+                        "food" : "food 2",
+                        "price" : 20,
+                        "quantity" : 2 
+                    },
+                    {   
+                        "foodId" : "60542c7982f39c0029d647db",
+                        "food" : "food 3",
+                        "price" : 13    
+                    }]
+}

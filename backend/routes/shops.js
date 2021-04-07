@@ -23,6 +23,8 @@ router.get('/customer', async (req, res, next) => {
             });
             // add shopList to redis
             await app_api.redis.set(title, JSON.stringify(result), 'EX', expiration, () => { console.log("update complete!") });
+
+            return;
         }
 
         // send result from redis
@@ -31,14 +33,13 @@ router.get('/customer', async (req, res, next) => {
         source: "redis",
         data: JSON.parse(getTitleDataFromCache)
         });
-        next();
+
     } catch (e) {
         console.error("unable to get list of shops", e);
         res.status(400).json({
         success: false,
         message: e
         });
-        next(e);
     }
 })
 
@@ -47,7 +48,7 @@ router.post('/frontstore', async (req, res, next) => {
     try {
         const shop = new Shop({
             shop: req.body.shop,
-            owner: req.body.owner,
+            ownerId: req.body.ownerId,
             area: req.body.area,
             menu: req.body.menu
         });
@@ -79,7 +80,7 @@ router.put("/frontstore", async (req, res, next) => {
         const shop = new Shop({
             _id: req.body.shopId,
             shop: req.body.shop,
-            owner: req.body.owner,
+            ownerId: req.body.ownerId,
             area: req.body.area,
             menu: req.body.menu
         });
@@ -114,8 +115,13 @@ router.delete("/frontstore/:shopId", async (req, res, next) => {
         //delete shop in mongodb
         Shop.deleteOne({ _id: req.params.shopId })
             .then(result => {
-                    res.status(200).json({ message: "shop deleted sucessfully!",
-                                           result: result });
+                    if (result.n == 1) {
+                        res.status(200).json({ message: "shop deleted sucessfully!",
+                                               result: result }); 
+                    } else {
+                        res.status(200).json({ message: "shop already deleted!",
+                                               result: result }); 
+                    }
                 }, notfound => {
                     res.status(404).json({ message: "unable to delete shop (wrong Id)",
                                            result: notfound });
