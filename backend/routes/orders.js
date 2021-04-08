@@ -139,7 +139,7 @@ router.get('/queue/:viewer', async (req, res, next) => {
         // data found
         res.status(200).json({
           source: "mongodb",
-          message: "sucessfully query the queue!",
+          message: "query the queue sucessfully!",
           data: queue
         });
         // update in redis given with a apporpriate viewer
@@ -157,7 +157,7 @@ router.get('/queue/:viewer', async (req, res, next) => {
       // in case of data is found in redis
       res.status(200).json({
         source: "redis",
-        message: "sucessfully query the queue!",
+        message: "query the queue sucessfully!",
         data: JSON.parse(getOrderFromRedis)
       });
     }
@@ -206,7 +206,7 @@ router.get('/record/:viewer', async (req, res, next) => {
         // data found
         res.status(200).json({
           source: "mongodb",
-          message: "sucessfully query the record!",
+          message: "query the record sucessfully!",
           data: record
         });
         // update in redis given with a apporpriate viewer
@@ -224,7 +224,7 @@ router.get('/record/:viewer', async (req, res, next) => {
       // in case of data is found in redis
       res.status(200).json({
         source: "redis",
-        message: "sucessfully query the record!",
+        message: "query the record sucessfully!",
         data: JSON.parse(getRecordFromRedis)
       });
     }
