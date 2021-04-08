@@ -1,16 +1,10 @@
 {   
-    "shopId" : "---shopId---",
+    "shopId" : "---shopId-2---",
     "userId" : "---userId---", 
-    "recieveTime" : null,
     "orderList" : [{ 
-                        "foodId" : "60542c7982f39c0029d647da",
-                        "food" : "food 2",
-                        "price" : 20,
+                        "foodId" : "606e13f24556d5009e40370c",
+                        "food" : "drink 1",
+                        "price" : 7,
                         "quantity" : 2 
-                    },
-                    {   
-                        "foodId" : "60542c7982f39c0029d647db",
-                        "food" : "food 3",
-                        "price" : 13    
                     }]
 }

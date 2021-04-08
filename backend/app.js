@@ -51,10 +51,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
-
 app.use("/api/shops", shopsRoutes);
 app.use("/api/orders", ordersRoutes);
 

@@ -10,11 +10,11 @@ const expiration = 3600; // second units
 router.get('/customer', async (req, res, next) => {
     try {
         // find data from redis
-        let getTitleDataFromCache = await app_api.getAsync(title);
+        const getTitleDataFromCache = await app_api.getAsync(title);
 
         if (!getTitleDataFromCache) {
             
-            let result = await Shop.find();
+            const result = await Shop.find();
             // send result from mongodb
             res.status(200).json({
                 message: "message sent successfully!",
@@ -52,17 +52,18 @@ router.post('/frontstore', async (req, res, next) => {
             area: req.body.area,
             menu: req.body.menu
         });
-        shop.save()
-            .then(createdShop => {
-                res.status(201).json({
-                shopId: createdShop._id,
-                message: 'shop added sucessfully!'
-                })
-            });
+
+        const createdShop = await shop.save()
+        res.status(201).json({
+            shopId: createdShop._id,
+            shopInfo: createdShop,
+            message: 'shop added sucessfully!'
+        })
 
         // update shopList to redis
-        let updatedResult = await Shop.find()
-        await app_api.redis.set(title, JSON.stringify(updatedResult), 'EX', expiration, () => { console.log("update complete!") });
+        const updatedResult = await Shop.find()
+        await app_api.redis.set(title, JSON.stringify(updatedResult), 'EX', expiration, 
+                                () => { console.log("update complete!") });
 
     } catch (e) {
         console.error("unable to record shop", e);
@@ -90,13 +91,13 @@ router.put("/frontstore", async (req, res, next) => {
                     res.status(200).json({ message: "shop updated sucessfully!",
                                         result: result }); 
                 }, notfound => {
-                    res.status(404).json({ message: "unable to update shop (wrong Id)",
-                                       result: notfound });
+                    res.status(400).json({ message: "unable to update shop (wrong Id)",
+                                           result: notfound });
                 });
 
         // update shopList to redis
         console.log("Update Redis!")
-        let updatedResult = await Shop.find();
+        const updatedResult = await Shop.find();
         await app_api.redis.set(title, JSON.stringify(updatedResult), 'EX', expiration, () => { console.log("update complete!") });
         
     } catch (e) {
@@ -119,15 +120,15 @@ router.delete("/frontstore/:shopId", async (req, res, next) => {
                         res.status(200).json({ message: "shop deleted sucessfully!",
                                                result: result }); 
                     } else {
-                        res.status(200).json({ message: "shop already deleted!",
+                        res.status(404).json({ message: "shop already deleted!",
                                                result: result }); 
                     }
                 }, notfound => {
-                    res.status(404).json({ message: "unable to delete shop (wrong Id)",
+                    res.status(400).json({ message: "unable to delete shop (wrong Id)",
                                            result: notfound });
                 });
         // update shopList to redis
-        let updatedResult = await Shop.find();
+        const updatedResult = await Shop.find();
         await app_api.redis.set(title, JSON.stringify(updatedResult), 'EX', expiration, () => { console.log("update complete!") } );
 
     } catch (e) {
@@ -137,6 +138,7 @@ router.delete("/frontstore/:shopId", async (req, res, next) => {
         message: e
     });
     }
+
 })
 
 module.exports = router;
