@@ -4,7 +4,7 @@ const app_api = require('../app');
 
 const router = express.Router();
 const title = "shopList";
-const expiration = 3600; // second units
+//const expiration = 3600; // second units
 
 // get shop list (customer side)
 router.get('/customer', async (req, res, next) => {
@@ -22,7 +22,7 @@ router.get('/customer', async (req, res, next) => {
                 data: result
             });
             // add shopList to redis
-            await app_api.redis.set(title, JSON.stringify(result), 'EX', expiration, () => { console.log("update complete!") });
+            await app_api.redis.set(title, JSON.stringify(result));
 
             return;
         }
@@ -62,8 +62,7 @@ router.post('/frontstore', async (req, res, next) => {
 
         // update shopList to redis
         const updatedResult = await Shop.find()
-        await app_api.redis.set(title, JSON.stringify(updatedResult), 'EX', expiration, 
-                                () => { console.log("update complete!") });
+        await app_api.redis.set(title, JSON.stringify(updatedResult));
 
     } catch (e) {
         console.error("unable to record shop", e);
@@ -98,7 +97,7 @@ router.put("/frontstore", async (req, res, next) => {
         // update shopList to redis
         console.log("Update Redis!")
         const updatedResult = await Shop.find();
-        await app_api.redis.set(title, JSON.stringify(updatedResult), 'EX', expiration, () => { console.log("update complete!") });
+        await app_api.redis.set(title, JSON.stringify(updatedResult));
         
     } catch (e) {
         console.error("unable to record shop", e);
@@ -129,7 +128,7 @@ router.delete("/frontstore/:shopId", async (req, res, next) => {
                 });
         // update shopList to redis
         const updatedResult = await Shop.find();
-        await app_api.redis.set(title, JSON.stringify(updatedResult), 'EX', expiration, () => { console.log("update complete!") } );
+        await app_api.redis.set(title, JSON.stringify(updatedResult));
 
     } catch (e) {
         console.error("unable to delete shop", e);

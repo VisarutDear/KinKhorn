@@ -4,7 +4,7 @@ const OrderRecord = require('../models/orderRecord');
 const app_api = require('../app');
 
 const router = express.Router();
-const expiration = 3600 * 24; // second units
+//const expiration = 3600 * 24; // second units
 
 // order food from customer
 router.post('/customer', async (req, res, next) => {
@@ -26,11 +26,11 @@ router.post('/customer', async (req, res, next) => {
     // update that frontstore queue 
     const frontStoreQueue = await Order.find({ shopId : req.body.shopId })
     // the reason to set "foq" in front of req.body.shopId is to avoid a same id with req.body.userId even if it rarely occur
-    await app_api.redis.set("foq" + req.body.shopId, JSON.stringify(frontStoreQueue), 'EX', expiration, () => { console.log("frontstore queue updated sucessfully!") });
+    await app_api.redis.set("foq" + req.body.shopId, JSON.stringify(frontStoreQueue));
 
     // update that customer queue
     const customerQueue = await Order.find({ userId : req.body.userId })
-    await app_api.redis.set("coq" + req.body.userId, JSON.stringify(customerQueue), 'EX', expiration, () => { console.log("customer queue updated sucessfully!") });
+    await app_api.redis.set("coq" + req.body.userId, JSON.stringify(customerQueue));
 
   } catch (e) {
     console.error("unable to store food order", e);
@@ -70,11 +70,11 @@ router.delete('/:command/:orderId', async (req, res, next) => {
     // update that frontstore queue in redis only if the order is completed
     const frontStoreQueue = await Order.find({ shopId : query.shopId })
     // the reason to set "foq" in front of query.shopId is to avoid a same id with query.userId even if it rarely occur
-    await app_api.redis.set("foq" + query.shopId, JSON.stringify(frontStoreQueue), 'EX', expiration, () => { console.log("frontstore queue updated sucessfully!") });
+    await app_api.redis.set("foq" + query.shopId, JSON.stringify(frontStoreQueue));
 
     // update that customer queue in redis
     const customerQueue = await Order.find({ userId : query.userId })
-    await app_api.redis.set("coq" + query.userId, JSON.stringify(customerQueue), 'EX', expiration, () => { console.log("customer queue updated sucessfully!") });
+    await app_api.redis.set("coq" + query.userId, JSON.stringify(customerQueue));
 
     // record the complete order
     const orderRecord = new OrderRecord({
@@ -88,11 +88,11 @@ router.delete('/:command/:orderId', async (req, res, next) => {
 
     // update the frontstore record in redis only if the order is completed
     const frontStoreRecord = await OrderRecord.find({ shopId : query.shopId, complete : true })
-    await app_api.redis.set("for" + query.shopId, JSON.stringify(frontStoreRecord), 'EX', expiration, () => { console.log("frontstore order record updated sucessfully!") });
+    await app_api.redis.set("for" + query.shopId, JSON.stringify(frontStoreRecord));
   
     // update that customer order record in redis
     const customerRecord = await OrderRecord.find({ userId : query.userId })
-    await app_api.redis.set("cor" + query.userId, JSON.stringify(customerRecord), 'EX', expiration, () => { console.log("customer order record updated sucessfully!") });
+    await app_api.redis.set("cor" + query.userId, JSON.stringify(customerRecord));
 
   } catch (e) {
     console.error("unable to delete order", e);
@@ -135,7 +135,7 @@ router.get('/queue/:viewer', async (req, res, next) => {
         queue = await Order.find({ userId : req.body.id })
       }
       
-      if (queue) {
+      if (queue.length != 0) {
         // data found
         res.status(200).json({
           source: "mongodb",
@@ -143,13 +143,14 @@ router.get('/queue/:viewer', async (req, res, next) => {
           data: queue
         });
         // update in redis given with a apporpriate viewer
-        await app_api.redis.set(viewerCode + req.body.id, JSON.stringify(queue), 'EX', expiration, () => { console.log("queue updated sucessfully!") });
+        await app_api.redis.set(viewerCode + req.body.id, JSON.stringify(queue));
 
       } else {
         // data not found
         res.status(404).json({
+          givenId: req.body.id,
           message: "no order yet (or maybe invalid given id)",
-          givenId: req.body.id
+          data: queue
         });
       }
 
@@ -202,7 +203,7 @@ router.get('/record/:viewer', async (req, res, next) => {
         record = await OrderRecord.find({ userId : req.body.id })
       }
 
-      if (record) {
+      if (record.length != 0) {
         // data found
         res.status(200).json({
           source: "mongodb",
@@ -210,13 +211,14 @@ router.get('/record/:viewer', async (req, res, next) => {
           data: record
         });
         // update in redis given with a apporpriate viewer
-        await app_api.redis.set(viewerCode + req.body.id, JSON.stringify(record), 'EX', expiration, () => { console.log("record updated sucessfully!") });
+        await app_api.redis.set(viewerCode + req.body.id, JSON.stringify(record));
 
       } else {
         // data not found
         res.status(404).json({
+          givenId: req.body.id,
           message: "no record yet (or maybe invalid given id)",
-          givenId: req.body.id
+          data: record
         });
       }
 
