@@ -8,6 +8,8 @@ const app = express();
 // mongodb
 mongoose.connect('mongodb://kinkhorn:TcdVQ7XhxnS3Mp32uGSU@mongodb:27017/kinkhorn', 
                 { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connect('mongodb://kinkhorn:TcdVQ7XhxnS3Mp32uGSU@18.139.229.135:27017/ciekinkhorn', 
+//                 { useNewUrlParser: true, useUnifiedTopology: true });
 
 // redis
 const redisClient = require("redis").createClient;
