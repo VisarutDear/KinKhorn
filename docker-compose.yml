@@ -26,10 +26,10 @@ services:
     restart: unless-stopped
     volumes:
       - ./backend/data:/data/db
-    expose: 
-      - "27017"
-    #ports:
-    #  - "27017:27017"
+    #expose: 
+    #  - "27017"
+    ports:
+      - "27017:27017"
     command: [--auth]
     networks:
       - backend
@@ -44,10 +44,10 @@ services:
     command: redis-server --requirepass "QCY68NMK7KGNabfPg72P"
     # environment:
     #   - REDIS_PORT_6379_TCP_ADDR:"backend:6379"  
-    expose: 
-      - "6379"
-    #ports:
-    #  - "6379:6379"
+    #expose: 
+    #  - "6379"
+    ports:
+      - "6379:6379"
 
 networks:
   backend:
