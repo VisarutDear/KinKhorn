@@ -1,17 +1,20 @@
-# base image 
-FROM node:14.15.5
+FROM node:9-slim
 
-# set working dir
-WORKDIR /app/Frontend
+# Create app directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-# install app dependencies
-COPY . /app
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package.json .
 
-#RUN npm install -g npm@lastest
-RUN rm -rf node_modules
-RUN npm update & npm cache clean --force
-RUN npm install --silent
+RUN npm install
+# If you are building your code for production
+# RUN npm ci --only=production
 
-CMD  npm start
+# Bundle app source
+COPY . .
 
-EXPOSE 3000
+EXPOSE 3100
+CMD [ "npm", "start" ]
