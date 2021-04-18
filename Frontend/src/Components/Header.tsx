@@ -4,21 +4,21 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const Header = ({cart} : any) => {
+const Header = ({ cart }: any) => {
   const { isSignedIn } = useContext(UserContext);
   const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
     let count = 0;
-    cart.forEach((item : any) => {
+    cart.forEach((item: any) => {
       count += item.qty;
     });
 
     setCartCount(count);
   }, [cart, cartCount]);
 
-  let cartNum : JSX.Element = (<div></div>);
-  if(cartCount > 0){
+  let cartNum: JSX.Element = (<div></div>);
+  if (cartCount > 0) {
     cartNum = (<span className="badge badge-danger navbar-badge">{cartCount}</span>)
   }
   let curUser: JSX.Element = (
@@ -37,20 +37,20 @@ const Header = ({cart} : any) => {
           </li>
           <li className="nav-item d-none d-sm-inline-block">
             <a href="/" className="nav-link">
-              Home
+              Home123
             </a>
           </li>
         </ul>
         <ul className="navbar-nav ml-auto">
-        <li className="nav-item">
+          <li className="nav-item">
             <a
               className="nav-link"
               href="/signin"
               role="button"
             >
               <i className="fas fa-user" />
-            </a>        
-          </li>     
+            </a>
+          </li>
         </ul>
       </nav>
     </>
@@ -236,9 +236,9 @@ const Header = ({cart} : any) => {
               to="/cart"
               role="button"
             >
-              <i className="fas fa-shopping-basket"/>
+              <i className="fas fa-shopping-basket" />
               {cartNum}
-            {/* <span className="badge badge-danger navbar-badge">{cartCount}</span> */}
+              {/* <span className="badge badge-danger navbar-badge">{cartCount}</span> */}
             </Link>
           </li>
         </ul>
@@ -248,7 +248,7 @@ const Header = ({cart} : any) => {
   return <>{curUser}</>;
 }
 
-const mapStateToProps = (state : any) => {
+const mapStateToProps = (state: any) => {
   return {
     cart: state.shop.cart,
   };

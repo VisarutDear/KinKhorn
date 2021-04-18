@@ -15,22 +15,19 @@ services:
     networks:
       - kinkhorn
         
-  frontend:
-    container_name: frontend
-    build: 
-      context: ./Frontend
-      dockerfile: Dockerfile
-    restart: always
-    volumes: 
-      - ./Frontend:/usr/src/app
-      - /usr/src/app/node_modules
-    ports:
-      - "3100:3100" 
-    networks:
-      - kinkhorn
+  # frontend:
+  #   container_name: frontend
+  #   build: 
+  #     context: ./Frontend
+  #     dockerfile: Dockerfile
+  #   restart: always
+  #   volumes: 
+  #     - ./Frontend:/usr/src/app
+  #     - /usr/src/app/node_modules
+  #   ports:
+  #     - "80:80"
+  #   networks:
+  #     - kinkhorn
 
 networks:
   kinkhorn:
-
-volumes:
-  redis-data:
