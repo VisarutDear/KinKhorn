@@ -11,6 +11,7 @@ const orderSchema = mongoose.Schema({
         price: { type: Number,  required: true },
         qty: { type: Number, default: 1 }
     }],
+    status:  { type: String, default: "open" },
 })
 
 module.exports = mongoose.model('Order', orderSchema, 'orders');
