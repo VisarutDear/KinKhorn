@@ -37,7 +37,7 @@ const Header = ({ cart }: any) => {
           </li>
           <li className="nav-item d-none d-sm-inline-block">
             <a href="/" className="nav-link">
-              Home123
+              Home
             </a>
           </li>
         </ul>

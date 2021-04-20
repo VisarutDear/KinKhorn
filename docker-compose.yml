@@ -6,28 +6,23 @@ services:
     build: 
       context: ./backend
       dockerfile: Dockerfile
+    image: kk_api
     restart: always
     volumes: 
       - ./backend:/usr/src/app
       - /usr/src/app/node_modules 
     ports:
       - "9000:3000"
-    networks:
-      - kinkhorn
         
-  # frontend:
-  #   container_name: frontend
-  #   build: 
-  #     context: ./Frontend
-  #     dockerfile: Dockerfile
-  #   restart: always
-  #   volumes: 
-  #     - ./Frontend:/usr/src/app
-  #     - /usr/src/app/node_modules
-  #   ports:
-  #     - "80:80"
-  #   networks:
-  #     - kinkhorn
-
-networks:
-  kinkhorn:
+  frontend:
+    container_name: frontend
+    build: 
+      context: ./Frontend
+      dockerfile: Dockerfile
+    image: kk_frontend
+    restart: always
+    volumes: 
+      - ./Frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "80:3000"
