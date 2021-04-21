@@ -14,7 +14,7 @@ router.get('/customer', async (req, res, next) => {
 
         if (!getTitleDataFromCache) {
             
-            const result = await Shop.find();
+            const result = await Shop.find({ status : "open" });
             // send result from mongodb
             res.status(200).json({
                 message: "message sent successfully!",

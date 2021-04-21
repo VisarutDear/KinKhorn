@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function MyActivitiesPage() {
     return (
-        <div className="content-wrapper">
+        <div>
             My act
         </div>
     )

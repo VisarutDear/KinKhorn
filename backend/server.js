@@ -3,7 +3,7 @@ const http = require("http");
 const debug = require("@xmpp/debug");
 
 const app = app_api.app;
-const PORT = "3000";
+const PORT = "9000";
 
 const normalizePort = val => {
   var port = parseInt(val, 10);

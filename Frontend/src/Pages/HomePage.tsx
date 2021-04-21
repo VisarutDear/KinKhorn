@@ -30,6 +30,8 @@ const KioskName = styled.div`
   font-weight : bold;
 `;
 
+
+
 interface ShopInfo {
   id: string;
   menu: any;
@@ -68,35 +70,35 @@ function Home() {
     );
   }
 
-  const fetchShop = useRef(() => {});
-  fetchShop.current = () => {
-    axios.get('http://143.198.208.245:9000/api/shops/customer').then((res) => {
-      // console.log('res ', res);
-      // console.log('res.data.data ', res.data.data);
-      setHomePageInfo(res.data.data);
-      // console.log('home ',homePageInfo);
-      // console.log('map : ', homePageInfo[0].shop);
-    });
-  };
+  // const fetchShop = useRef(() => {});
+  // fetchShop.current = () => {
+  //   axios.get('http://143.198.208.245:9000/api/shops/customer').then((res) => {
+  //     // console.log('res ', res);
+  //     // console.log('res.data.data ', res.data.data);
+  //     setHomePageInfo(res.data.data);
+  //     // console.log('home ',homePageInfo);
+  //     // console.log('map : ', homePageInfo[0].shop);
+  //   });
+  // };
 
-  useEffect(() => {
-    fetchShop.current();
-  }, [fetchShop]);
+  // useEffect(() => {
+  //   fetchShop.current();
+  // }, [fetchShop]);
 
-  const ShopData = (
-    <div>
-      {homePageInfo.map((data: ShopInfo, i) => (
-        <div key ={`data-${i}`}>
-          {data.shop}{' '}
-          {data.menu.map((ele: Menu) => (
-            <div>
-              {ele.name} price : {ele.price}
-            </div>
-          ))}
-        </div>
-      ))}
-    </div>
-  );
+  // const ShopData = (
+  //   <div>
+  //     {homePageInfo.map((data: ShopInfo, i) => (
+  //       <div key ={`data-${i}`}>
+  //         {data.shop}{' '}
+  //         {data.menu.map((ele: Menu) => (
+  //           <div>
+  //             {ele.name} price : {ele.price}
+  //           </div>
+  //         ))}
+  //       </div>
+  //     ))}
+  //   </div>
+  // );
 
   return (
     <>
@@ -157,15 +159,16 @@ function Home() {
 
           </Card>
         </Container>
-        <Button 
-        border="none"
-        color="pink"
-        height = "200px"
-        onClick={() => console.log("You clicked on the pink circle!")}
-        radius = "50%"
-        width = "200px"
-        children = "I'm a pink circle!"
-      />
+        {/* <Float>
+          <Button
+          border="none"
+          color="pink"
+          height = "60px"
+          onClick={() => console.log("You clicked on the pink circle!")}
+          radius = "50%"
+          width = "60px"
+                />
+        </Float> */}
       </div>
     </>
   );
