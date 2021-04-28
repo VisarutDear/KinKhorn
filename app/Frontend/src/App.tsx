@@ -96,7 +96,7 @@ function App({current} : any) {
         <PrivateRoute exact path='/' component={HomePage}/>
         <PrivateRoute exact path='/canteen' component={CanteenPage}/>
         <PrivateRoute exact path='/myactivity' component={MyActivitiesPage}/>
-        <PrivateRoute exact path='/myaccount' component={AccountPage}/>
+        <Route exact path='/myaccount' component={AccountPage}/>
         <PrivateRoute exact path='/payment' component={PaymentPage}/>
         <PrivateRoute exact path='/signout' component={SignOutPage}/>
         <PrivateRoute exact path='/canteen/kiosk' component={KioskPage}/>
