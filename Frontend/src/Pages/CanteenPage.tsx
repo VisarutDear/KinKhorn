@@ -11,6 +11,7 @@ import Subtitle from '../Components/Subtitle';
 import {
   fetchKiosks,
   loadCurrentKiosk,
+  refreshCart,
 } from '../Redux/Shopping/shopping-action';
 
 const StyledCard = styled(Card)`
@@ -61,13 +62,15 @@ const CanteenPage = ( {fetchkiosks , kioskData, loadCurrentKiosk} : CanteenProps
     // console.log(res.data.data);
     // setKioskData(res.data.data);
     fetchkiosks();
+    refreshCart();
   }, []);
   // console.log('kioskData : ',kioskData); 
 
   const KioskContent = (
     <>
       {kioskData.map((kiosk : any) => {
-        console.log('kiosk ', kiosk);
+        // console.log('kiosk ', kiosk);
+        
         return (
           <>
             <StyledRow key={kiosk._id}>
@@ -101,8 +104,8 @@ const CanteenPage = ( {fetchkiosks , kioskData, loadCurrentKiosk} : CanteenProps
   return (
     <>
       <Container maxWidth="sm">
-        <div style={{ paddingLeft: '8px' }}>
-          <div>Home / CanteenA</div>
+        <div style={{ display : 'flex', flexFlow : 'column', paddingLeft: '8px',paddingTop: '8px' }}>
+          <Link to = '/'> <i className="fas fa-chevron-left"/> </Link>
           <h2>Canteen A</h2>
         </div>
         <StyledCard>{KioskContent}</StyledCard>
@@ -124,6 +127,7 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     fetchkiosks : () => dispatch(fetchKiosks()),
     loadCurrentKiosk : (kiosk : any) => dispatch(loadCurrentKiosk(kiosk)),
+    refreshCart : () => dispatch(refreshCart()),
   };
 };
 

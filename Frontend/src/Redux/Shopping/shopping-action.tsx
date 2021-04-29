@@ -11,15 +11,26 @@ export type CartItemType = {
   qty: number;
 };
 
-export const addToCart = (clickedItem: CartItemType) => {
+export const addToCart = (clickedItem: CartItemType, quantity : number) => {
   // console.log('click : ',clickedItem);
   return {
     type: actionTypes.ADD_TO_CART,
     payload: {
       id: clickedItem._id,
+      qty : quantity,
     },
   };
 };
+
+export const refreshCart = () => {
+  // console.log('click : ',clickedItem);
+  return {
+    type: actionTypes.REFRESH_CART,
+    payload: {
+    },
+  };
+};
+
 
 export const removeFromCart = (clickedItem: CartItemType) => {
   return {

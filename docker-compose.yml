@@ -6,7 +6,7 @@ services:
     build: 
       context: ./backend
       dockerfile: Dockerfile
-    image: kk_api
+    image: kk_api:1.0
     restart: always
     volumes: 
       - ./backend:/usr/src/app
@@ -19,7 +19,7 @@ services:
     build: 
       context: ./Frontend
       dockerfile: Dockerfile
-    image: kk_frontend
+    image: kk_frontend:1.0
     restart: always
     volumes: 
       - ./Frontend:/usr/src/app
