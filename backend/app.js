@@ -35,6 +35,7 @@ db.once('open', function () {
   console.log('connected sucessfully!!');
 })
 
+// parse your incoming responses as a JSON object
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -51,6 +52,9 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(express.static(__dirname + '/public'));
+
+// set route
 app.use("/api/shops", shopsRoutes);
 app.use("/api/orders", ordersRoutes);
 

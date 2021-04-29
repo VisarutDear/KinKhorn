@@ -1,10 +1,46 @@
 const express = require('express');
+const multer = require('multer');
+
 const Shop = require('../models/shop');
 const app_api = require('../app');
 
 const router = express.Router();
 const title = "shopList";
 //const expiration = 3600; // second units
+
+// upload image
+const MIME_TYPE_MAP = {
+    "image/png": "png",
+    "image/jpeg": "jpg",
+    "image/jpg": "jpg"
+};
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const isValid = MIME_TYPE_MAP[file.mimetype];
+    let error = new Error("Invalid mime type");
+    if (isValid) {
+      error = null;
+    }
+    cb(error, './src/images')
+  },
+  filename: (req, file, cb) => {
+    const name = file.originalname.split('.')[0] // select only the file name, not its file type
+        .toLowerCase()
+        .split(" ")
+        .join("-");
+    const ext = MIME_TYPE_MAP[file.mimetype];
+    cb(null, name + "." + ext);
+    //cb(null, name + "-" + Date.now() + "." + ext);
+  }
+});
+const upload = multer({ storage: storage });
+
+router.post('/upload', upload.single('image'), (req, res) => {
+    console.log(req);
+    res.send('upload!')
+    //console.log(req.body.body.shop)
+});
 
 // get shop list (customer side)
 router.get('/customer', async (req, res, next) => {
