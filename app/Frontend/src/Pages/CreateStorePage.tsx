@@ -10,6 +10,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { produce } from 'immer';
 import axios from 'axios';
 import {UserContext} from '../Context/UserContext';
+import { FilterDramaTwoTone } from '@material-ui/icons';
 
 interface menuType {
   id: string;
@@ -28,9 +29,14 @@ interface FormValues {
   fileupload : string;
 }
 
+// interface files {
+//   files : string;
+// }
+
 export default function CreateStorePage() {
   const userContext = useContext(UserContext).user;
   const [file, setFile] = useState("");
+  const [menuImg, setMenuImg] = useState([] as any);
   const { register, handleSubmit } = useForm<FormValues>();
   const [menuFields, setmenuField] = useState<menuType[]>([
     {
@@ -44,27 +50,20 @@ export default function CreateStorePage() {
   ]);
   const onSubmit = (data: FormValues) => {
     const formData = new FormData();
+    menuImg.forEach((file : any) => formData.append('files[]',file));
     formData.append("image",file);
-    // formData.append("shop",'eiei');
     formData.append("shop",data.shop);
     formData.append("ownerId",data.ownerId);
     formData.append("area",data.area);
     formData.append("menu",JSON.stringify(menuFields));
-    // console.log('form data : ',formData);
     const finalData = {...data, menu : menuFields};
-    // const json = {"shop" : data.shop, "ownerId" : userContext.email, "area" : data.area, "menu" : menuFields}
-    // console.log('json : ',json);
-    // axios.post('http://143.198.208.245:9000/api/shops/frontstore',json).then((res) => console.log('res :',res));
     axios.post('http://13.250.64.65:9000/api/shops/upload',formData).then((res) => console.log('res :',res)).catch((err) => console.log('err : ',err));
     alert(JSON.stringify(formData));
   };
 
   const handleUpload = (event : any) => {
     setFile(event.target.files[0]);
-    // console.log('file : ',file);
   }
-  // console.log('file2 : ',file);
-
   const handleAddFields = () => {
     setmenuField([
       ...menuFields,
@@ -78,6 +77,12 @@ export default function CreateStorePage() {
       },
     ]);
   };
+
+  const imgChangeHandler = (e : any) => {
+    const files = [...menuImg];
+    files.push(...e.target.files);
+    setMenuImg(files)
+  }
 
   const handleRemoveFields = (index: number) => {
     console.log('pop :', index);
