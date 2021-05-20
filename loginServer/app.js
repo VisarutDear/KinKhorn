@@ -3,7 +3,7 @@ const app = express();
 const session = require("express-session");
 const jwt = require("jsonwebtoken");
 const bodyParser = require("body-parser");
-// const cookieParser = require("cookie-parser");
+const cookie = require("cookie-session");
 app.use(bodyParser.json());
 const mongoose = require("mongoose");
 const People = require("./models/people");
@@ -58,20 +58,22 @@ app.set("view engine", "ejs");
 // var date = new Date();
 // date.setDate(date.getDate() + 2);
 app.use(
-  session({
-    resave: false,
-    saveUninitialized: true,
-    secret: "SECRET",
-    cookie: {
-      path: "/",
-      domain: "kinkhorn.pongpich.xyz",
-      expires: new Date(new Date() + 2),
-    },
+  cookie({
+    // path: "/",
+    // domain: "kinkhorn.pongpich.xyz",
+    // expires: new Date(new Date() + 2),
     signed: false,
     secure: true,
-    httpOnly: false,
+    // httpOnly: true,
   })
 );
+
+// app.use(
+//   session({
+//     resave: false,
+//     saveUninitialized: true,
+//     secret: "SECRET",
+//   )};
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => console.log("App listening on port " + port));
@@ -101,7 +103,10 @@ const authenticateJWT = (req, res, next) => {
   console.log("next : ", req.session.token);
 
   if (cookie) {
+    console.log("inif")
     jwt.verify(cookie, accessTokenSecret, (err, user) => {
+      console.log("Error :", err)
+      console.log("User: ", user)
       if (err) {
         return res.sendStatus(403);
       }
@@ -109,7 +114,8 @@ const authenticateJWT = (req, res, next) => {
       next();
     });
   } else {
-    res.sendStatus(401);
+    console.log("inelse")
+    return res.sendStatus(401);
   }
 };
 
@@ -153,19 +159,12 @@ app.get("/success", (req, res) => {
     { user: userProfile["_json"] },
     accessTokenSecret
   );
-  // var date = new Date();
-  // date.setDate(date.getDate() + 2);
 
+  console.log(accessToken)
   req.session = {
    token: accessToken,
   }
-  // res.cookie('token', accessToken, {
-  //   path     : '/',
-  //   domain   : 'kinkhorn.pongpich.xyz',
-  //   expires: date,
-  //   secure: true, // set to true if your using https
-  //   httpOnly: false,
-  // });
+  console.log(req.session.token)
 
   const person = new People({
     name: userProfile["_json"].name,
@@ -183,16 +182,10 @@ app.get("/success", (req, res) => {
       if (err) throw err;
       if (result.length === 0) {
         person.save().then((saveUser) => {
-          res.writeHead(302, {
-            Location: "https://kinkhorn.pongpich.xyz/",
-          });
-          res.end();
+          res.redirect("https://kinkhorn.pongpich.xyz/");
         });
       } else {
-        res.writeHead(302, {
-          Location: "https://kinkhorn.pongpich.xyz/",
-        });
-        res.end();
+        res.redirect("https://kinkhorn.pongpich.xyz/");
       }
     });
 });
