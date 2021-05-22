@@ -21,6 +21,7 @@ import CreateStorePage from './Pages/CreateStorePage';
 import OrderingPage from './Pages/OrderingPage';
 import HisotryPage from './Pages/HistoryPage';
 import SingleOrderPage from './Pages/SingleOrderPage';
+import SignInKioskPage from './Pages/SignInKioskPage';
 
 
 const PrivateRoute = (props: RouteProps) => {
@@ -76,6 +77,7 @@ function App({current} : any) {
         {/* <Route exact path='/myactivity/order/:id' component={HisotryPage}/> */}
         <Route path = '/history' component = {HisotryPage}/>
         <Route path = '/order/id' component = {SingleOrderPage}/>
+        <Route path = '/signinkiosk' component = {SignInKioskPage}/>
         {/* FIXME : DELETE THIS PATH */}
         <PrivateRoute exact path='/' component={HomePage}/>
         <PrivateRoute exact path='/canteen' component={CanteenPage}/>
