@@ -5,20 +5,12 @@ import Button from '@material-ui/core/Button';
 // import styled from 'styled-components';
 import { makeStyles } from "@material-ui/core/styles";
 import DeleteIcon from '@material-ui/icons/Delete';
+// import logo from '../images/kinkhorn.gif';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      "& > *": {
-        margin: theme.spacing(1)
-      }
-    }
-  }));
+
 
 function SignInKioskPage() {
-    const classes = useStyles();
+    
   return (
     <>
       <div
@@ -26,7 +18,7 @@ function SignInKioskPage() {
         style={{ textAlign: 'center', backgroundSize: 'cover' }}
       >
         <div style={{ transform: 'translate(0%,50%)' }}>
-          <img src="https://picsum.photos/150/150" alt="Logo KK"></img>
+          <img src= "https://kinkhorn-bucket-1.s3-ap-southeast-1.amazonaws.com/kinkhornLogo.gif" alt="Logo KK" width="250" height="210"></img>
           {/* <img src="./img/promo1.jpg" alt="Logo KK"></img> */}
           <div style={{ margin: '16px' }}>
             <div>WELCOME</div>
