@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function HistoryPage() {
+export default function SingleOrderPage() {
   const userContext = useContext(UserContext);
   const params = { id: userContext.user.user_id };
   const classes = useStyles();
@@ -57,15 +57,47 @@ export default function HistoryPage() {
   return (
     <div style={{ width: "100%" }} className={classes.root}>
       <Paper className={classes.paper}>
-        <Grid container wrap="nowrap" spacing={2}>
-          <Grid item>
-            <img
-              className={classes.img}
-              alt="complex"
-              src="https://picsum.photos/100/100"
-            />
-          </Grid>
-          <Grid item xs zeroMinWidth>
+        <Grid container spacing={3}>
+          <Grid item xs = {12}>
+          <Box fontWeight="fontWeightLight" m={-0.5}>
+        
+        Order ID
+        
+        </Box>
+        </Grid>
+        <Grid item xs={1}>
+        <Typography variant="body2">
+          <Box fontWeight="fontWeightBold" >
+              500
+              </Box>
+              </Typography>
+              
+        
+        </Grid>
+        <Grid item xs={4}>
+        <Typography variant="body2">
+          <Box fontWeight="fontWeightBold" >
+              Order for
+              </Box>
+              </Typography>
+             
+              
+        </Grid>
+        <Grid item xs={7}>
+        <Typography variant="body2">
+        <Box textAlign="right">
+                Client Name
+                </Box>
+              </Typography>
+              <Typography variant="body2">
+              {/* <Box textAlign="right"> */}
+                {/* 60 */}
+                {/* </Box> */}
+              </Typography>
+        </Grid>
+      </Grid>
+        
+          {/* <Grid item xs zeroMinWidth>
             <Grid item xs container direction="column" spacing={1}>
               <Grid item xs>
                 <Typography gutterBottom variant="subtitle1">
@@ -75,14 +107,14 @@ export default function HistoryPage() {
                   Order ID: 112546
                 </Typography>
               </Grid>
-            </Grid>
+            </Grid> */}
             {/* <Grid item>
               <Typography variant="body2" style={{ cursor: "pointer" }}>
                 Rate Order
               </Typography>
             </Grid> */}
-          </Grid>
-        </Grid>
+          {/* </Grid> */}
+        {/* </Grid> */}
       </Paper>
       <Paper className={classes.paper}>
         <Grid container wrap="nowrap" spacing={2}>
@@ -112,6 +144,7 @@ export default function HistoryPage() {
           </Box>
           
         </Grid>
+        
         <Grid item xs={1}>
         <Typography variant="body2">
           <Box fontWeight="fontWeightBold" >
@@ -158,7 +191,7 @@ export default function HistoryPage() {
           Subtotal
         </Box>
         <Box fontWeight="fontWeightLight" m={-0.5}>
-          Delivery Fee
+          VAT (7%)
         </Box>
         </Grid>
               <Grid item xs={2}>
