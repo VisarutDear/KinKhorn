@@ -19,9 +19,10 @@ import SingleKiosk from './Components/SingleKiosk/SingleKiosk';
 import QueuePage from './Pages/QueuePage';
 import CreateStorePage from './Pages/CreateStorePage';
 import OrderingPage from './Pages/OrderingPage';
-import HisotryPage from './Pages/HistoryPage';
+import HistoryPage from './Pages/HistoryPage';
 import SingleOrderPage from './Pages/SingleOrderPage';
 import SignInKioskPage from './Pages/SignInKioskPage';
+import SingleStorePage from './Pages/SingleStorePage';
 
 
 const PrivateRoute = (props: RouteProps) => {
@@ -74,10 +75,11 @@ function App({current} : any) {
         <Route exact path='/signout' component={SignOutPage}/>
         <Route exact path='/ordering' component={OrderingPage}/>
         <Route path = '/queue' component = {QueuePage}/>
-        {/* <Route exact path='/myactivity/order/:id' component={HisotryPage}/> */}
-        <Route path = '/history' component = {HisotryPage}/>
+        {/* <Route exact path='/myactivity/order/:id' component={HistoryPage}/> */}
+        <Route path = '/history' component = {HistoryPage}/>
         <Route path = '/order/id' component = {SingleOrderPage}/>
         <Route path = '/signinkiosk' component = {SignInKioskPage}/>
+        <Route path = '/singlestore' component = {SingleStorePage}/>
         {/* FIXME : DELETE THIS PATH */}
         <PrivateRoute exact path='/' component={HomePage}/>
         <PrivateRoute exact path='/canteen' component={CanteenPage}/>
