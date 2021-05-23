@@ -59,6 +59,7 @@ function App({current} : any) {
       <Switch>
         {/* {route} */}
         {/* FIXME : DELETE THIS PATH */}
+        <Route path='/signin' component={SignInPage} />
         <Route exact path='/' component={HomePage}/>
         <Route exact path='/canteen' component={CanteenPage}/>
         <Route exact path='/myactivity' component={MyActivitiesPage}/>
