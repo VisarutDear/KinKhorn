@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import styles from './ReduxCart.module.css';
 
 import { connect } from 'react-redux';
-
+import { spacing } from '@material-ui/system';
 import CartItem from './CartItem/CartItem';
 import { Card, Container, Button } from '@material-ui/core';
 import Subtitle from '../Components/Subtitle';
@@ -23,6 +23,17 @@ import Grid from "@material-ui/core/Grid";
 import Paper from '@material-ui/core/Paper';
 import ListIcon from '@material-ui/icons/List';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
+import 'date-fns';
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
+import TodayIcon from '@material-ui/icons/Today';
+import { deepPurple } from '@material-ui/core/colors';
+
+
+
+// export default connect(mapStateToProps)(Cart);
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,6 +51,10 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(0),
       backgroundColor: theme.palette.secondary.main,
     },
+    purple: {
+      color: theme.palette.getContrastText(deepPurple[500]),
+      backgroundColor: deepPurple[500],
+    },
   }),
 );
 
@@ -48,6 +63,15 @@ const useStyles = makeStyles((theme: Theme) =>
 const Cart = ({ cart, currentKiosk }: any) => {
   
   const classes = useStyles();
+  const [selectedDate, setSelectedDate] = React.useState<Date | null>(
+    new Date('2014-08-18T21:11:54'),
+  );
+
+  const handleDateChange = (date: Date | null) => {
+    setSelectedDate(date);
+  };
+
+  
   const userContext = useContext(UserContext);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
@@ -101,11 +125,13 @@ const Cart = ({ cart, currentKiosk }: any) => {
 
     orderButton = (<>
     <Link to="/ordering">
+      
     <Button
       variant="contained"
       color="primary"
-      style={{ width: '100%' }}
+      style={{ width: '100%', marginTop: '16px'}}
       onClick={() => placeOrder(order)}
+      // style={{ marginTop: '16px' }}
     >
       Place Order
     </Button>
@@ -161,7 +187,7 @@ const Cart = ({ cart, currentKiosk }: any) => {
           </ListItemText>
           </ListItem>
           <Divider/>
-
+          
           <ListItem>
           <ListItemText>
           {/* <Box textAlign="left"> */}
@@ -174,7 +200,7 @@ const Cart = ({ cart, currentKiosk }: any) => {
           
           <ListItem>
           <ListItemText>
-<Box mb = {0} textAlign="left"> 
+          <Box mb = {0} textAlign="left"> 
             Order Details
            </Box>
           {/* <div>
@@ -194,7 +220,69 @@ const Cart = ({ cart, currentKiosk }: any) => {
               </Box>
               {/* </Grid> */}
             </div>
+            </div>
+            </Card>
+            
+          <Card style={{ marginTop: '16px' }}>
+          <Grid container direction="row" >
+            <div>
+              <ListItem>
+            <ListItemAvatar>
+          <Avatar color="blue" className={classes.purple}>
+            <TodayIcon  color="inherit"/>
+          </Avatar>
+          </ListItemAvatar>
+          
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            {/* <Grid container direction="row" justify="flex-end"> */}
+            <KeyboardDatePicker
+               margin="normal"
+               id="date-picker-dialog"
+               label="Select Pick Up Date"
+               format="MM/dd/yyyy"
+               value={selectedDate}
+               onChange={handleDateChange}
+               KeyboardButtonProps={{
+                 'aria-label': 'change date',
+                }}
+              />
+              </MuiPickersUtilsProvider>
+              </ListItem>
+              </div>
+              </Grid>
+            
             <Divider/>
+          
+          <Grid container direction="row">
+            
+            <div>
+              <ListItem>
+            <ListItemAvatar>
+          <Avatar color="blue" className={classes.purple}>
+            <AccessTimeIcon color="inherit"/>
+          </Avatar>
+          </ListItemAvatar>
+          
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            {/* <Grid container direction="row" justify="flex-end"> */}
+            <KeyboardTimePicker
+                margin="normal"
+                id="time-picker"
+                label="Select Pick Up Time"
+                value={selectedDate}
+                onChange={handleDateChange}
+                KeyboardButtonProps={{
+                  'aria-label': 'change time',
+                }}
+              />
+              </MuiPickersUtilsProvider>
+              </ListItem>
+              </div>
+            </Grid>
+  
+            </Card>
+          <Card style={{ marginTop: '16px' }}>  
+          
             <ListItem>
           <ListItemText>
           {/* <Box textAlign="left"> */}
@@ -206,9 +294,10 @@ const Cart = ({ cart, currentKiosk }: any) => {
           {/* </Box> */}
           </ListItemText>
           </ListItem>
-          <Divider/>
-            </div>
           </Card>
+            {/* </div> */}
+          
+          
           <Card style={{ marginTop: '16px' }}>
           <ListItemText>
             <Box m={1}>
