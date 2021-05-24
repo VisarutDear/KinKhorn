@@ -25,6 +25,7 @@ import * as apicall from '../api/apicall';
 import Select from '@material-ui/core/Select';
 import Divider from '@material-ui/core/Divider';
 import AddBoxIcon from '@material-ui/icons/AddBox';
+// import NumberFormat from 'react-number-format';
 import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox';
 interface menuType {
   id: string;
@@ -270,6 +271,7 @@ export default function CreateStorePage() {
                   </FormControl>
                   <FormControl variant="outlined" className={classes.formControl3} >
                   <input
+                    
                     onChange={(e) => {
                       const price = e.target.value;
                       setmenuField((currentMenu) =>
@@ -280,6 +282,7 @@ export default function CreateStorePage() {
                     }}
                     value={menu.price}
                     placeholder="Insert Price"
+                    
                   />
                   </FormControl>
                   <FormControl variant="outlined" className={classes.formControl3} >

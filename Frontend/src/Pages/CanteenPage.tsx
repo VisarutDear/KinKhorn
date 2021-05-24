@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import ColorLine from '../Components/ColorLine';
 import SingleKiosk from '../Components/SingleKiosk/SingleKiosk';
 import Subtitle from '../Components/Subtitle';
+import Input from '@material-ui/core/Input';
 import {
   fetchKiosks,
   loadCurrentKiosk,
@@ -70,6 +71,7 @@ const CanteenPage = ( {fetchkiosks , kioskData, loadCurrentKiosk} : CanteenProps
           <>
             <StyledRow key={kiosk._id}>
               <Col>
+              {/* <Button disabled> */}
                 <Styledlink
                   to={`canteen/kiosk/${kiosk._id}`}
                   onClick={() => loadCurrentKiosk(kiosk) }
@@ -84,9 +86,12 @@ const CanteenPage = ( {fetchkiosks , kioskData, loadCurrentKiosk} : CanteenProps
                     <Subtitle>Category</Subtitle>
                     <div>
                       <i className="fas fa-star"></i> 4.7 | open
+                      {/* <Input defaultValue="Disabled" disabled inputProps={{ 'aria-label': 'description' }} /> */}
                     </div>
+                    
                   </StyledKiosk>
                 </Styledlink>
+                {/* </Button> */}
               </Col>
             </StyledRow>
             <ColorLine color="#C1C7CF" />

@@ -10,9 +10,44 @@ import { UserContext } from '../Context/UserContext';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import * as apicall from '../api/apicall';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+import StoreIcon from '@material-ui/icons/Store';
+import Divider from '@material-ui/core/Divider';
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+import Paper from '@material-ui/core/Paper';
+import ListIcon from '@material-ui/icons/List';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      flexGrow: 1,
+      overflow: 'hidden',
+      padding: theme.spacing(0, 3),
+    },
+    paper: {
+      maxWidth: 400,
+      margin: `${theme.spacing(1)}px auto`,
+      padding: theme.spacing(2),
+    },
+    avatar: {
+      margin: theme.spacing(0),
+      backgroundColor: theme.palette.secondary.main,
+    },
+  }),
+);
+
 
 
 const Cart = ({ cart, currentKiosk }: any) => {
+  
+  const classes = useStyles();
   const userContext = useContext(UserContext);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
@@ -79,35 +114,113 @@ const Cart = ({ cart, currentKiosk }: any) => {
     )
 
     
-    currentKioskName = (<div>KioskName</div>)
+    currentKioskName = (
+    <div>
+      <ListItem>
+      <ListItemAvatar>
+          <Avatar className={classes.avatar}>
+            <StoreIcon />
+          </Avatar>
+          </ListItemAvatar>
+          <ListItemText>
+          <Box fontWeight="fontWeightBold">
+          KioskName
+        </Box>
+          
+          </ListItemText>
+          </ListItem>
+          </div>)
   }
 
   
   return (
     <Container maxWidth="lg">
       <h2>My Cart</h2>
-      <Card>
+      <Card >
             {/* <div>back</div> */}
             <div>{currentKioskName}</div>
           </Card>
-          <Subtitle>Order Summary</Subtitle>
-          <Card>
-            <div>
+          {/* <Typography>Order Summary</Typography> */}
+          <Card style={{ marginTop: '16px' }}>
+            {/* <div>
               {cart.map((item: any) => (
                 <CartItem key={item._id} item={item} />
               ))}
-            </div>
-            ------
+            </div> */}
             <div>
-              Total : ({totalItems} items)
-              <div>{totalPrice} Baht</div>
+            <ListItem>
+          <ListItemAvatar>
+          <Avatar color="blue">
+            <ListIcon color="inherit"/>
+          </Avatar>
+          </ListItemAvatar>
+          <ListItemText>
+          <Box fontWeight="fontWeightLight">
+            Order Summary
+          </Box>
+          </ListItemText>
+          </ListItem>
+          <Divider/>
+
+          <ListItem>
+          <ListItemText>
+          {/* <Box textAlign="left"> */}
+            Total Item: (0)
+          {/* </Box> */}
+          </ListItemText>
+          </ListItem>
+          <Divider/>
+          
+          
+          <ListItem>
+          <ListItemText>
+<Box mb = {0} textAlign="left"> 
+            Order Details
+           </Box>
+          {/* <div>
+              {cart.map((item: any) => (
+                <CartItem key={item._id} item={item} />
+              ))}
+            </div> */}
+          </ListItemText>
+          </ListItem>
+          
+          <div>
+            {/* <Grid item xs={12}> */}
+            <Box fontWeight="fontWeightLight" m={2} textAlign="justify">
+              {cart.map((item: any) => (
+                <CartItem key={item._id} item={item} />
+              ))}
+              </Box>
+              {/* </Grid> */}
+            </div>
+            <Divider/>
+            <ListItem>
+          <ListItemText>
+          {/* <Box textAlign="left"> */}
+            Total <div>
+                <Box fontWeight="fontWeightLight">
+                {totalPrice} Baht
+                </Box>
+              </div>
+          {/* </Box> */}
+          </ListItemText>
+          </ListItem>
+          <Divider/>
             </div>
           </Card>
-          <Subtitle>Payment Details</Subtitle>
-          <Card>
+          <Card style={{ marginTop: '16px' }}>
+          <ListItemText>
+            <Box m={1}>
+            Your Wallet 
+            </Box>
+            <Box m={1}fontWeight="fontWeightLight"><i className="fas fa-wallet" style={{ marginRight: '4px' }}></i>{' '}
+            {userContext.user.money} Baht</Box>
+            </ListItemText>
+          
             {/* OnClick = topup */}
-            <i className="fas fa-wallet" style={{ marginRight: '4px' }}></i>{' '}
-            {userContext.user.money} Baht
+            {/* <i className="fas fa-wallet" style={{ marginRight: '4px' }}></i>{' '}
+            {userContext.user.money} Baht */}
           </Card>
             {orderButton}
       {/* <div className={styles.cart}>
