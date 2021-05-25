@@ -53,31 +53,32 @@ function Home() {
   const [homePageInfo, setHomePageInfo] = useState([]);
   const [isCanteenOpen, setIsCanteenOpen] = useState(false);
   const userContext = useContext(UserContext);
-
-  const toggleCanteenDropdown = () => {
-    setIsCanteenOpen((prevState) => !prevState);
-  };
-
-  // const test = () => {
-  //     axios.get('https://kinkhorn.pongpich.xyz/oauth/user/info')
-  //       .then((res) => {
-  //         console.log('res.data :',res.data); 
-  //         // userContext.setCurrentUser(res.data.user,res.data.money,res.data.user_id);
-  //       })
-  //       .catch((err) => console.error(err));
-  // }
-
-  for (let i = 0; i < 5; i += 1) {
+  
+  const img_lst = ['https://d1hjxsusq6jw1u.cloudfront.net/promo1.jpg','https://d1hjxsusq6jw1u.cloudfront.net/promo2.jpg','https://d1hjxsusq6jw1u.cloudfront.net/promo3.jpg']
+  
+  for (let i = 0; i < 3; i += 1) {
     slides.push(
       <SwiperSlide key={`slide-${i}`} tag="li">
         <img
-          src={`https://picsum.photos/id/${i + 1}/450/200`}
-          style={{ listStyle: 'none'}}
+          // src={`https://picsum.photos/id/${i + 1}/450/200`}
+          src={img_lst[i]}
+
+          style={{ listStyle: 'none',width:'450px',height:'200px'}}
           alt={`Slide ${i}`}
         />
       </SwiperSlide>
     );
   }
+
+  // img_lst.map((link,i) => {
+  //   slides.push(<SwiperSlide key={`slide-${i}`} tag="li">
+  //   <img
+  //     src={link}
+  //     style={{ listStyle: 'none'}}
+  //     alt={`Slide ${i}`}
+  //   />
+  // </SwiperSlide>)
+  // })
 
   return (
     <>
@@ -102,18 +103,18 @@ function Home() {
                 <ImgWithtextButton link='/canteen' icon='fas fa-utensils fa-2x' name='Canteen A'/>
               </Col>
               <Col style={{ margin: '8px' }}>
-              <ImgWithtextButton link='/canteen' icon='fas fa-utensils fa-2x' name='Canteen A'/>
+              <ImgWithtextButton link='/canteen' icon='fas fa-utensils fa-2x' name='Canteen B'/>
               </Col>
             </Row>
             <Row style={{ textAlign: 'center' }}>
               <Col>
-              <ImgWithtextButton link='/canteen' icon='fas fa-utensils fa-2x' name='Canteen A'/>
+              <ImgWithtextButton link='/canteen' icon='fas fa-utensils fa-2x' name='Canteen C'/>
               </Col>
               <Col>
-              <ImgWithtextButton link='/canteen' icon='fas fa-utensils fa-2x' name='Canteen A'/>
+              <ImgWithtextButton link='/canteen' icon='fas fa-utensils fa-2x' name='Canteen D'/>
               </Col>
               <Col>
-              <ImgWithtextButton link='/canteen' icon='fas fa-utensils fa-2x' name='Canteen A'/>
+              <ImgWithtextButton link='/canteen' icon='fas fa-utensils fa-2x' name='Canteen E'/>
               </Col>
             </Row>
           </Card>

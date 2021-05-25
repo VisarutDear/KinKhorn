@@ -65,31 +65,31 @@ const CanteenPage = ( {fetchkiosks , kioskData, loadCurrentKiosk,refreshCart} : 
   const KioskContent = (
     <>
       {kioskData.map((kiosk : any) => {
-        // console.log('kiosk ', kiosk);
+        console.log('kiosk ', kiosk);
         return (
           <>
-            <StyledRow key={kiosk._id}>
-              <Col>
-                <Styledlink
-                  to={`canteen/kiosk/${kiosk._id}`}
-                  onClick={() => loadCurrentKiosk(kiosk) }
-                >
-                  <img
-                    src={`https://picsum.photos/70/70`}
-                    alt={'canteen img'}
-                    style={{ width: '70px', height: '70px' }}
-                  />
-                  <StyledKiosk>
-                    <div>{kiosk.shop}</div>
-                    <Subtitle>Category</Subtitle>
-                    <div>
-                      <i className="fas fa-star"></i> 4.7 | open
-                    </div>
-                  </StyledKiosk>
-                </Styledlink>
-              </Col>
-            </StyledRow>
-            <ColorLine color="#C1C7CF" />
+              <StyledRow key={kiosk._id}>
+                <Col>
+                  <Styledlink
+                    to={`canteen/kiosk/${kiosk._id}`}
+                    onClick={() => loadCurrentKiosk(kiosk) }
+                  >
+                    <img
+                      src={`https://picsum.photos/70/70`}
+                      alt={'canteen img'}
+                      style={{ width: '70px', height: '70px' }}
+                    />
+                    <StyledKiosk>
+                      <div>{kiosk.shop}</div>
+                      <Subtitle>Category</Subtitle>
+                      <div>
+                        <i className="fas fa-star"></i> 4.7 | open
+                      </div>
+                    </StyledKiosk>
+                  </Styledlink>
+                </Col>
+              </StyledRow>
+              <ColorLine color="#C1C7CF" />
           </>
         );
       })}

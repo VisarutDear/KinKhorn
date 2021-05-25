@@ -8,7 +8,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardHeader from '@material-ui/core/CardHeader';
 import Button from '@material-ui/core/Button';
 import * as apicall from '../api/apicall'
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -139,6 +139,7 @@ const reducer = (state: State, action: Action): State => {
 }
 
 const Login = () => {
+  let history = useHistory();
   const userContext = useContext(UserContext);
   const classes = useStyles();
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -167,6 +168,7 @@ const Login = () => {
     // })
     // .catch((err) => console.error(err));
     alert('Success!')
+    history.push('/payment')
     
 
   };

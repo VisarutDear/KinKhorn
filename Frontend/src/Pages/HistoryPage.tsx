@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useContext, useEffect, Component } from "react";
+import React, { useContext, useEffect, Component,useState } from "react";
 import { UserContext } from "../Context/UserContext";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -37,8 +37,11 @@ const useStyles = makeStyles((theme) => ({
 const HistoryPage = ({currentOrder} : any ) => {
   const userContext = useContext(UserContext);
   const classes = useStyles();
-  const order = currentOrder.currentOrder
+  console.log(currentOrder)
+  const order = currentOrder
   console.log('currentOrder : ',order);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalItems, setTotalItems] = useState(0);  
   useEffect(() => {
     // axios
     //   .get("http://143.198.208.245:9000/api/orders/queue/customer", { params })
@@ -115,7 +118,7 @@ const HistoryPage = ({currentOrder} : any ) => {
         
           Order Summary
           
-          </Box>
+        </Box>
           
         </Grid>
         <Grid item xs={1}>

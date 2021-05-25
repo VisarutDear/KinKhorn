@@ -16,9 +16,9 @@ function SignInPage() {
           {/* <img src="./img/promo1.jpg" alt="Logo KK"></img> */}
           <div style={{ margin: '16px' }}>
             <div>WELCOME</div>
-            <div>PLEASE LOGIN TO USE THE APP!</div>
+            <div>PLEASE LOGIN TO USE THE APP!!</div>
           </div>
-          <a href="https://kinkhorn.pongpich.xyz/oauth/google"> 
+          <a href="/oauth/google"> 
             {/* Sign In With KMITL */}
             <div style = {{ display : 'flex',flexFlow : 'column', alignItems : 'center', margin : '8px'}}>
             <Button
@@ -34,7 +34,7 @@ function SignInPage() {
             {isMobile ? <div></div>:
             <>
             <div style ={{display : 'flex',justifyContent : 'center',flexFlow : 'column'}}>
-              <a href="https://kinkhorn.pongpich.xyz/oauth/card/login">  <Button
+              <a href="/oauth/card/login">  <Button
                   variant="contained"
                   color="default"
                   aria-label="contained primary button group"
@@ -42,7 +42,7 @@ function SignInPage() {
                     Guest Log In
                   </Button>
               </a>
-              <a href="https://kinkhorn.pongpich.xyz/oauth/card/exchange" style={{fontSize : '16px'}}>
+              <a href="/oauth/card/exchange" style={{fontSize : '16px'}}>
                   exchange oauth card
               </a>
             </div>
