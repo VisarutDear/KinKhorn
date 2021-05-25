@@ -71,6 +71,7 @@ const SingleOrderPage = ({ currentOrder,onlyView }: any) => {
     .catch((err) => console.log(err))
     history.push('/order')
   };
+  const VAT = totalPrice * 0.07
   return (
     <>
       <div style={{ width: '100%' }} className={classes.root}>
@@ -151,7 +152,7 @@ const SingleOrderPage = ({ currentOrder,onlyView }: any) => {
                 <Box textAlign="right">{totalPrice}</Box>
               </Typography>
               <Typography variant="body2">
-                <Box textAlign="right">{totalPrice * 0.07}</Box>
+                <Box textAlign="right">{VAT.toFixed(2)}</Box>
               </Typography>
             </Grid>
             <Grid item xs={10}>
@@ -170,7 +171,7 @@ const SingleOrderPage = ({ currentOrder,onlyView }: any) => {
           </Grid>
           <Grid item></Grid>
         </Paper>
-        {onlyView ? <div></div>:<Button variant='contained' color="primary" onClick={() => handleDone()}>READY TO PICKUP</Button>}
+        {onlyView ? <div></div>:<Button variant='contained' color="primary" fullWidth onClick={() => handleDone()}>READY TO PICKUP</Button>}
       </div>
     </>
   );

@@ -10,6 +10,8 @@ import * as apicall from '../api/apicall';
 import { Link } from 'react-router-dom';
 import { loadCurrentOrder } from '../Redux/Shopping/shopping-action';
 import { connect } from 'react-redux';
+import RefreshIcon from '@material-ui/icons/Refresh';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,6 +43,10 @@ const MyActivitiesPage = ({loadCurrentOrder} : MyActivitiesPageProps) => {
   const classes = useStyles();
   const [myactivity, setMyAcitivity] = useState<any>([]);
   const [history, sethistory] = useState<any>([]);
+
+  const refreshPage = () => {
+    window.location.reload(false);
+  };
 
   useEffect(() => {
     apicall
@@ -181,7 +187,11 @@ const MyActivitiesPage = ({loadCurrentOrder} : MyActivitiesPageProps) => {
   return (
     <div className={classes.root}>
       <h2 style={{ margin: '4px 8px' }}>My Activity</h2>
-      {/* <Link to="/history"> */}
+      <Button
+          startIcon={<RefreshIcon />}
+          onClick={refreshPage}
+          style={{ right: '0px' }}
+        ></Button>
         <Paper className={classes.paper}>{myact}</Paper>
       {/* </Link> */}
       <h2 style={{ margin: '4px 8px' }}>History</h2>

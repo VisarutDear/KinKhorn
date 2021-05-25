@@ -42,11 +42,19 @@ const HistoryPage = ({currentOrder} : any ) => {
   console.log('currentOrder : ',order);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalItems, setTotalItems] = useState(0);  
+
   useEffect(() => {
-    // axios
-    //   .get("http://143.198.208.245:9000/api/orders/queue/customer", { params })
-    //   .then((res) => console.log("res :", res));
-  }, []);
+    let items = 0;
+    let price = 0;
+
+    order.orderList.forEach((item: any) => {
+      items += item.qty;
+      price += item.qty * item.price;
+    });
+
+    setTotalItems(items);
+    setTotalPrice(price);
+  }, [order, totalPrice, totalItems, setTotalPrice, setTotalItems]);
   
   // const MockData = [{
   //   _id : "1234",
@@ -62,7 +70,7 @@ const HistoryPage = ({currentOrder} : any ) => {
   //   userId : "63413",
   //   shopname : "shopname"
   // }]
-
+  const VAT = totalPrice * 0.07
   return (
     <div style={{ width: "100%" }} className={classes.root}>
       <Paper className={classes.paper}>
@@ -99,7 +107,7 @@ const HistoryPage = ({currentOrder} : any ) => {
             <Grid item xs container direction="column" spacing={1}>
               <Grid item xs>
                 <Typography variant="body2" gutterBottom>
-                <i className="fas fa-map-marker-alt"/> Canteen Name
+                <i className="fas fa-map-marker-alt"/> Canteen {order.area}
                 </Typography>
                 {/* <Typography variant="body2" gutterBottom>
                   To: HM Building
@@ -113,51 +121,23 @@ const HistoryPage = ({currentOrder} : any ) => {
       <Paper className={classes.paper}>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-        
         <Box fontWeight="fontWeightBold" m={-0.5}>
-        
           Order Summary
-          
         </Box>
-          
         </Grid>
-        <Grid item xs={1}>
-        <Typography variant="body2">
-          <Box fontWeight="fontWeightBold" >
-              1x
-              </Box>
-              </Typography>
-              <Typography variant="body2">
-              <Box fontWeight="fontWeightBold"  >
-              10x
-              </Box>
-              </Typography>
-        
-        </Grid>
-        <Grid item xs={9}>
-        <Typography variant="body2">
-          <Box fontWeight="fontWeightRegular" >
-              Spaghetti Carbonara
-              </Box>
-              </Typography>
-              <Typography variant="body2">
-              <Box fontWeight="fontWeightRegular" >
-              Spaghetti Carbonara
-              </Box>
-              </Typography>
-        </Grid>
-        <Grid item xs={2}>
-        <Typography variant="body2">
-        <Box textAlign="right">
-                60
-                </Box>
-              </Typography>
-              <Typography variant="body2">
-              <Box textAlign="right">
-                60
-                </Box>
-              </Typography>
-        </Grid>
+        {order.orderList.map((menu: any) => {
+              return (
+                <>
+                <Grid container spacing={2} >
+                <Grid item xs={2} style = {{paddingLeft : '16px',fontWeight : 'bold'}}>
+                  {menu.qty}x
+                </Grid>
+                <Grid item xs={7}>{menu.name}</Grid>
+                <Grid item xs={3}>{menu.price}</Grid>
+                </Grid>
+                </>
+              );
+            })}
       </Grid>
       </Paper>
       <Paper className={classes.paper}>
@@ -173,12 +153,12 @@ const HistoryPage = ({currentOrder} : any ) => {
               <Grid item xs={2}>
               <Typography variant="body2">
               <Box textAlign="right">
-                200
+                {totalPrice}
                 </Box>
               </Typography>
               <Typography variant="body2">
               <Box textAlign="right">
-                2
+              {VAT.toFixed(2)}
                 </Box>
               </Typography>
               
@@ -193,7 +173,7 @@ const HistoryPage = ({currentOrder} : any ) => {
         <Grid item xs={2}>
               <Typography variant="body2">
               <Box textAlign="right">
-                14000
+              {totalPrice * 0.07 + totalPrice}
                 </Box>
               </Typography>
               </Grid>

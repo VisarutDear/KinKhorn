@@ -32,6 +32,8 @@ const Styledlink = styled(Link)`
 const StyledRow = styled(Row)`
   padding-left: 8px;
   width: 100%;
+  
+  
 `;
 
 const StyledKiosk = styled.div`
@@ -39,6 +41,7 @@ const StyledKiosk = styled.div`
   display: flex;
   flex-flow: column;
   width: 100%;
+  
 `;
 
 export type ShopType = {
@@ -66,6 +69,9 @@ const CanteenPage = ( {fetchkiosks , kioskData, loadCurrentKiosk,refreshCart} : 
     <>
       {kioskData.map((kiosk : any) => {
         console.log('kiosk ', kiosk);
+        if(kiosk.status === "close"){
+          return(<div></div>)
+        }
         return (
           <>
               <StyledRow key={kiosk._id}>
