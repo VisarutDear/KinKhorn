@@ -16,7 +16,7 @@ function SignInPage() {
           {/* <img src="./img/promo1.jpg" alt="Logo KK"></img> */}
           <div style={{ margin: '16px' }}>
             <div>WELCOME</div>
-            <div>PLEASE LOGIN TO USE THE APP!!</div>
+            <div>PLEASE LOGIN TO USE THE APP!</div>
           </div>
           <a href="/oauth/google"> 
             {/* Sign In With KMITL */}

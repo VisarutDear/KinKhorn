@@ -8,12 +8,12 @@ export interface User {
   };
 
 export const EmptyUser:User = {
-  name: '',
-  picture: '',
-  money: 0,
-  email : '',
-  _id : '',
-  role : '',
+  name: 'Visarut Tachatanachai',
+  picture: 'https://picsum.photos/200/200',
+  money: 50000,
+  email : '61011358@kmitl.ac.th',
+  _id : '60a819acd312d800becfaa63',
+  role : 'customer',
 
 };
 

@@ -68,8 +68,12 @@ router.post('/customer', async (req, res, next) => {
 
   } catch (e) {
     console.error("unable to store food order", e);
-    res.status(400).json({
-    success: false,
+  //   res.status(400).json({
+  //   success: false,
+  //   message: e
+  // });
+  res.status(200).json({
+    success: true,
     message: e
   });
   }

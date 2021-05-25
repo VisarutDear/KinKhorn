@@ -56,7 +56,8 @@ function App({current} : any) {
   let route = (<>
   </>)
 
-  if (userContext.user.role === 'customer'){
+  // if (userContext.user.role === 'customer'){
+  if (false){
     route = (<>
         <Route exact path='/' component={HomePage}/>
         <Route exact path='/canteen' component={CanteenPage}/>
@@ -84,7 +85,8 @@ function App({current} : any) {
         }
     </>)
   }
-  else if (userContext.user.role === 'seller'){
+  // else if (userContext.user.role === 'seller'){
+  else if (false){
     // console.log('Seller')
     route = (<>
       <Route exact path='/oauth/logout'/>
@@ -106,8 +108,48 @@ function App({current} : any) {
   else {
     // console.log('else')
     route = (<>
-      <Redirect from="/" to="/signin" />
-      <Route path='/signin' component={SignInPage} />
+      {/* <Redirect from="/" to="/signin" /> */}
+      {/* <Route path='/signin' component={SignInPage} /> */}
+      {/* customer path */}
+      <Route exact path='/' component={HomePage}/>
+      <Route exact path ='/order' component = {HomePageSeller} />
+      <Route exact path='/canteen' component={CanteenPage}/>
+      <Route exact path='/myactivity' component={MyActivitiesPage}/>
+      <Route exact path='/myactivity/:id' component={HisotryPage}/>
+      <Route exact path='/myaccount' component={AccountPage}/>
+      <Route exact path='/payment' component={PaymentPage}/>
+      <Route exact path='/canteen/kiosk' component={KioskPage}/>
+      <Route path = '/cart' component={ReduxCart}/>
+      <Route exact path='/canteen/kiosk/:id' component={SingleKiosk}/>
+      <Route exact path='/signout' component={SignOutPage}/>
+      <Route exact path='/ordering' component={OrderingPage}/>
+      <Route exact path='/myactivity/order/:id' component={HisotryPage}/>
+      <Route exact path = '/history' component = {HisotryPage}/>
+      <Route exact path='/oauth/logout'/>
+      {!current ? (
+      <Redirect to="/" />
+      ) : (
+        <Route exact path='/canteen/kiosk/menu/:id' component={SingleItem} />
+      )}
+      {/* {
+            (userContext.isSignedIn)
+              ? <Redirect from="/signin" to="/" />
+              : <Route path='/signin' component={SignInPage} />
+      } */}
+      {/* seller path */}
+      
+      <Route exact path = '/order/:id' component = {SingleOrderPage} />
+      <Route exact path = '/orderHistory' component = {OrderHistoryPage} />
+      <Route exact path = '/mystore' component = {MyStorePage} />
+      <Route exact path = '/mystore/:id' component = {SingleStorePage}/>
+      <Route exact path='/createStore' component={CreateStorePage}/>
+      <Route exact path='/signout' component={SignOutPage}/>
+      {/* {
+              (userContext.isSignedIn)
+                ? <Redirect from="/signin" to="/order" />
+                : <Route path='/signin' component={SignInPage} />
+      } */}
+
      </>)
   }
   // console.log('user id: ', userContext.user._id)

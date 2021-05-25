@@ -28,14 +28,24 @@ export const UserContext = React.createContext<UserContextType>({
 
 const UserContextProvider = (props: Props) => {
   const [user, setUser] = useState<User>(EmptyUser);
-  const [isSignedIn, setSignedIn] = useState(false);
+  // const [isSignedIn, setSignedIn] = useState(false);
   // FIXME : DELETE MOCKUP
-  // const [isSignedIn, setSignedIn] = useState(true);
+  const [isSignedIn, setSignedIn] = useState(true);
   const setCurrentUser = (user: User) => {
     
     // const userWithMoney = {...user, money : money, user_id : user_id, roles : 'seller'}
     // console.log('input  : ',userWithMoney);
-    setUser(user);
+    const mockuser = {
+      name: 'Visarut',
+      picture: 'https://picsum.photos/200/200',
+      money: 5000,
+      email : '61011358@kmitl.ac.th',
+      _id : '61011358',
+      role : 'customer',
+    
+    };
+    setUser(mockuser);
+    // setUser(user);
     if (user.name) {
       setSignedIn(true);
     } 
